@@ -1,0 +1,46 @@
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="../assets/style.css"/>
+</head>
+<body class="form-style-1">
+
+<br>
+<h1><b>&emsp;MongoDB CRUD Demo</b></h1>
+<br>
+
+<!-- Confirmation -->
+<form method="GET" action="/">
+    <ul>   
+        <fieldset>
+        <legend>Person Updated</legend>
+        <label>Mongo ID:</label><br>
+        <input type="text" name="mongoid" id="mongoid" class="field-small" value="<%= _id %>" readonly/>
+        
+        <br>
+        <label>Changes:</label>
+<textarea readonly rows=10 cols=60>
+Mongo ID: <%= _id %>
+ID: <%= personid %>
+Name: <%= firstname %> <%= surname %> 
+Phone: <%= telephone %>
+
+Changed To:
+ID: <%= newpersonid %>
+Name: <%= newfirstname %> <%= newsurname %> 
+Phone: <%= newtelephone %>
+</textarea>
+        <br>
+    
+        <input type="submit" value="Ok">
+        </fieldset>
+
+
+
+        <br><br><input type="submit" value="Ok"/>       
+        </fieldset>
+        </ul>
+</form>
+
+</body>
+
+</html>

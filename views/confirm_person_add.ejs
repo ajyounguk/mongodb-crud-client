@@ -1,0 +1,39 @@
+<html>
+<head>
+    <link href="assets/style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body class="form-style-1">
+
+<br>
+<h1><b>&emsp;MongoDB CRUD Demo</b></h1>
+<br>
+
+<!-- Confirmation -->
+<form method="GET" action="./">
+    <ul>   
+            <fieldset>
+               <legend>Person Created</legend>
+       
+               <label>Person ID:</label><br>
+               <input value="<%= personid %>" type="text" name="personid" id="personid" class="field-small" placeholder="Person ID" readonly/>
+               <br>
+       
+             
+               <br>
+               <label>Full Name:</label><br>
+               <input value="<%= firstname %>" type="text" name="firstname" id ="firstname" class="field-small" placeholder="First Name"  size=35 readonly/>
+               <input value="<%= surname %>" type="text" name="surname" id="surname" class="field-small" placeholder="Surname" size=35 readonly/>
+               
+               <br><br>
+               <label>Telephone:</label><br>
+       
+               <input value="<%= telephone %>" type="number" name="telephone" id ="telephone" class="field-small" placeholder="Telephone" size=50 readonly>
+               <br><br><input type="submit" value="Ok" />
+       
+               </fieldset>
+           </ul>
+</form>
+    
+</body>
+
+</html>
