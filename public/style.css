@@ -1,42 +1,40 @@
 <style type="text/css">
 
-.form-style-1 {
-    margin:10px auto;
-    max-width: 400px;
-    padding: 20px 12px 10px 20px;
-    font: 14px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+.form-style-1  {
+    margin: 50px;
 }
+
 
 .form-style-1 body {
-    margin:10px auto;
-    max-width: 400px;
-    padding: 20px 12px 10px 20px;
+    margin: 15px;
+    background-color: rgb(240, 249, 250);
 }
 
+.form-style-1 span {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
 
 .form-style-1 h1 {
-    margin:0 0 3px 0;
-    padding:0px;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    margin:10px 0 10px 0;
     display:block;
-    font-weight: bold;
-    font: 20px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
  }
  
 
 .form-style-1 h2 {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     margin:0 0 3px 0;
     padding:0px;
     display:block;
     font-weight: bold;
-    font: 18px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
  }
 
  .form-style-1 h3 {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     margin:0 0 3px 0;
     padding:0px;
     display:block;
     font-weight: bold;
-    font: 16px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
  }
  
 
@@ -49,6 +47,7 @@
 
 
 .form-style-1 fieldset {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
     padding: 10px;
     display: block;
     list-style: none;
@@ -59,19 +58,27 @@
 
 
 .form-style-1 legend {
-    margin:0 0 3px 0;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    margin:30 0 3px 0;
     padding:0px;
     display:block;
     font-weight: bold;
-    font: 16px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 19;
+}
+
+.form-style-1 label {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    margin:12px 0 3 0;
+    padding:0px;
+    display:block;
+    font-size: 14;
 }
 
 .form-style-1 textarea {
- 
     padding:7px;
     display:block;
     font-weight: bold;
-    font: 14px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font: 14px;
     background-color: rgb(245, 246, 255);
 }
 
@@ -80,7 +87,7 @@
     padding:0px;
     display:block;
     font-weight: bold;
-    font: 14px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font: 14px;
  }
 
 .form-style-1 input[type=text], 

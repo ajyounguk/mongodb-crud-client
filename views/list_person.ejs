@@ -1,42 +1,42 @@
-<html>
+<html class="form-style-1">
 <head>
     <link href="assets/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body class="form-style-1">
 
 <br>
-<h1><b>&emsp;MongoDB CRUD Demo</b></h1>
-<br>
+<h1><b>MongoDB CRUD Demo</b></h1>
 
 <!-- Confirmation -->
 <form method="GET" action="./">
 <ul>   
 
-
-<fieldset>
-<legend>Person List</legend>
+<legend>Person List</legend><hr>
 
 <input type="submit" value="Ok"><br><br>
 
 <%for (var i in personList){ %>
-
-    <label><%= i %>.</label>
-    <textarea readonly rows=3 cols=60>
+    <table>
+        <tr>
+            <td valign="top" >
+                <label><%= i %>:</label>
+            </td>
+            <td>
+    <textarea readonly rows=4 cols=50 >
     Mongo ID: <%= personList[i].id %>&emsp;ID: <%= personList[i].personid %>
     Name: <%= personList[i].firstname %> <%= personList[i].surname %> 
     Phone: <%= personList[i].telephone %>
     </textarea>
+            </td>
+        </tr>
     <br>
-
+    </table>
 <%}%>
-
+<br>
 <input type="submit" value="Ok">
-</fieldset>
 
 </ul>
 </form>
-    
-
 
 </body>
 
