@@ -64,6 +64,8 @@
     display:block;
     font-weight: bold;
     font-size: 19;
+    color: rgb(1, 12, 12);
+    text-shadow: 1px 0px rgb(27, 48, 30);
 }
 
 .form-style-1 label {
@@ -79,7 +81,7 @@
     display:block;
     font-weight: bold;
     font: 14px;
-    background-color: rgb(245, 246, 255);
+    background-color: rgb(252, 252, 252);
 }
 
 .form-style-1 form {
