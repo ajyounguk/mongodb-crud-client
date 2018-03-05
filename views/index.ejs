@@ -1,96 +1,81 @@
-<html>
+<html class="form-style-1">
 <head>
     <link href="assets/style.css" type="text/css" rel="stylesheet"/>
 </head>
 
 <body class="form-style-1">
+<h1><b>MongoDB CRUD Demo</b></h1>
+<title>MongoDB CRUD Demo</title>
 
-<br>
-<h1><b>&emsp;MongoDB CRUD Demo</b></h1>
-<br>
-
+<ul>
 <!-- 1. Add Person to Collection -->
 <form method="POST" action="/person" >
- <ul>   
-     <fieldset>
-        <legend>1. Add person to DB collection</legend>
 
-        <label>Person ID:</label><br>
-        <input type="number" name="personid" id="personid" class="field-small" placeholder="Person ID" required/>
-        <br>
+    <legend>1. Add person to DB collection</legend><hr>
 
-      
-        <br>
-        <label>Full Name:</label><br>
-        <input type="text" name="firstname" id ="firstname" class="field-small" placeholder="First Name"  size=35 required/>
-        <input type="text" name="surname" id="surname" class="field-small" placeholder="Surname" size=35 required/>
-        
-        <br><br>
-        <label>Telephone:</label><br>
+    <label>Person ID:</label>
+    <input type="number" name="personid" id="personid" class="field-small" placeholder="Person ID" required/>
 
-        <input type="number" name="telephone" id ="telephone" class="field-small" placeholder="Telephone" size=50 required>
-        <br><br><input type="submit" value="Create Person" />
+    <br>
+    <label>Full Name:</label>
+    <input type="text" name="firstname" id ="firstname" class="field-divided" placeholder="First Name" size=10  required/>
+    <input type="text" name="surname" id="surname" class="field-divided" placeholder="Surname"  required/>
+    
+    <br>
+    <label>Telephone:</label>
 
-        </fieldset>
-    </ul>
+    <input type="number" name="telephone" id ="telephone" class="field-small" placeholder="Telephone" size=50 required>
+    <br><br><input type="submit" value="Create Person" />
+
 </form>
 <br>
+
     
 <!-- 2. Get Persons -->
 <form method="GET" action="/person" >
- <ul>
-    <fieldset>
-        <legend>2. List persons</legend>
-        <br><input type="submit" value="List Persons" />
-    </fieldset>
-</ul>
+    <legend>2. List persons</legend><hr>
+    <br><input type="submit" value="List Persons" />
 </form>
 <br>    
 
 <!-- 3. Update Persons -->
 <form method="POST" action="/person/update" >
-    <ul>   
-        <fieldset>
-           <legend>3. Update person </legend>
-   
-            <label>Mongo ID:<br>
-            <input type="text" name ="mongoid" id ="mongoid" class="field-small" required>
-            <br><br>
 
-           <label>Person ID:</label><br>
-           <input type="number" name="personid" id="personid" class="field-small" placeholder="Person ID" required/>
-           <br>
-   
-           <br>
-           <label>Full Name:</label><br>
-           <input type="text" name="firstname" id ="firstname" class="field-small" placeholder="First Name"  size=35 required/>
-           <input type="text" name="surname" id="surname" class="field-small" placeholder="Surname" size=35 required/>
-           
-           <br><br>
-           <label>Telephone:</label><br>
-   
-           <input type="number" name="telephone" id ="telephone" class="field-small" placeholder="Telephone" size=50 required>
-           <br><br><input type="submit" value="Update Person" />
-   
-           </fieldset>
-       </ul>
+    <legend>3. Update person </legend><hr>
+
+    <label>Mongo ID:</label>
+    <input type="text" name ="mongoid" id ="mongoid" class="field-small" placeholder="Mongo ID" required>
+    <br>
+
+    <label>Person ID:</label>
+    <input type="number" name="personid" id="personid" class="field-small" placeholder="Person ID" required/>
+    <br>
+
+    
+    <label>Full Name:</label>
+    <input type="text" name="firstname" id ="firstname" class="field-small" placeholder="First Name"  size=35 required/>
+    <input type="text" name="surname" id="surname" class="field-small" placeholder="Surname" size=35 required/>
+    
+
+    <label>Telephone:</label>
+
+    <input type="number" name="telephone" id ="telephone" class="field-small" placeholder="Telephone" size=50 required>
+    <br><br><input type="submit" value="Update Person" />
+
+
    </form>
    <br>
 
 <!-- 4. Delete Persons -->
-<form method="POST" action="/person/delete" >
-<ul>
-        <fieldset>
+<form method="POST" action="/person/delete" >    
 
-        <legend>4. Delete person</legend>
-        
-        <label>Mongo ID:<br>
-        <input placeholder ="Mongo ID" id ="mongoid" type="text" name ="mongoid" size=50 required>
-        
-        <br><br><input type="submit" value="Delete Persons" />
-        
-    </fieldset>
-</ul>
+    <legend>4. Delete person</legend><hr>
+
+    <label>Mongo ID:</label>
+    <input placeholder ="Mongo ID" id ="mongoid" type="text" name ="mongoid" size=50 required>
+
+    <br><br><input type="submit" value="Delete Persons" />
+
 </form>
 
 </body>
