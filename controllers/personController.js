@@ -1,19 +1,12 @@
 module.exports = function(app, mongoose) {
 
+
+    var Person = require('../models/personModel')
+    
     var bodyParser = require('body-parser')
     var urlencodedParser = bodyParser.urlencoded({extended: false})
 
-     // data 
-     var Schema = mongoose.Schema
-
-     var personSchema = new Schema({
-         firstname: String,
-         surname: String,
-         telephone: String
-     })
-
-     // person schema for mongo 
-     var Person = mongoose.model('Person', personSchema)
+   
    
     // serve up index
     app.get('/', function (req, res) {
