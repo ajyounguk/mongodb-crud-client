@@ -4,17 +4,18 @@
 Demo code that excercises MongoDB Create Read Update Delete (CRUD) operations with the mongoose npm module
 
 ## Contains
-- /config = mongo config sample file
-- /controller = controller code with routes and DB operations in  personController.js
+- /config = mongo connectionconfig sample file
+- /controller = controller code with routes and DB operations in  personController.js. db test data seeding in setupController
+- model = person DB data model
 - /public = stylesheet for HTML views
 - /views EJS views for the various application HTML pages
 - app.js main webserver code
 
 ### Mongo Functionality:
-- Add a person
-- List person(s)
-- Update person (needs MongoID from list function)
-- Delete person (needs MongoID from list function)
+- Add a person - CREATE Crud
+- List person(s) - READ cRud
+- Update person (needs MongoID from list function) - UPDATE crUd
+- Delete person (needs MongoID from list function) - DELETE cruD
 
 ## Acknowledgements
 CSS template inspired from: https://www.sanwebe.com/2014/08/css-html-forms-designs
@@ -42,6 +43,8 @@ cp config-sample.json config.json
 node app.js
 
 point your browser at the local/remoteIP port 3000 to load the HTML app
+or
+localhost:3000/person/setup to run the DB seeding/initial setup
 
 
 ### EOF Readme..
