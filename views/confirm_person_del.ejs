@@ -1,26 +1,25 @@
-<html class="form-style-1">
-<head>
-<link type="text/css" rel="stylesheet" href="../assets/style.css"/>
-</head>
-<body class="form-style-1">
+<html>
+<head><link rel="stylesheet" type="text/css" href="/assets/styles.css"/></head>
 
-
-<h1><b>MongoDB CRUD Demo</b></h1>
+<body style="background-color: rgb(229, 245, 250);">
 <title>MongoDB CRUD Demo</title>
+<div class="simple-style">
+<div>
+    <h2>MongoDB CRUD Demo</h2><hr>
+</div>
+<br>
 
 <!-- Confirmation -->
 <form method="GET" action="/">
-    <ul>   
      
     <legend>Person Deleted</legend><hr>
-    <label>Mongo ID:</label>
-    <input type="text" name="personid" id="personid" class="field-small" value="<%= _id %>" readonly/>
-            
-    <br><br><input type="submit" value="Ok"/>       
-
+    <ul>   
+        <label>Mongo ID:</label>
+        <input type="text" name="mongoid" id="mongoid" class="field-small" value="<%= _id %>" readonly/>
+                
+        <br><br><input type="submit" value="Ok"/>       
     </ul>
 </form>
-
+</div>
 </body>
-
 </html>
