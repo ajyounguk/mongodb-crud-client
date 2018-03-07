@@ -7,7 +7,6 @@ module.exports = function(app, mongoose) {
      var Schema = mongoose.Schema
 
      var personSchema = new Schema({
-         personid: String,
          firstname: String,
          surname: String,
          telephone: String
@@ -26,7 +25,6 @@ module.exports = function(app, mongoose) {
 
        // setup data in the model
         var personModel = Person ({
-            personid: req.body.personid,
             firstname: req.body.firstname,
             surname: req.body.surname,
             telephone: req.body.telephone    
@@ -68,7 +66,6 @@ module.exports = function(app, mongoose) {
 
         // setup update data in the model
          var newPerson = {
-             personid: req.body.personid,
              firstname: req.body.firstname,
              surname: req.body.surname,
              telephone: req.body.telephone    
@@ -80,8 +77,6 @@ module.exports = function(app, mongoose) {
             } else {
                 if (person) {
                     res.status(200)
-
-                    person['newpersonid'] = req.body.personid
                     person['newfirstname'] = req.body.firstname
                     person['newsurname'] = req.body.surname
                     person['newtelephone'] = req.body.telephone
@@ -119,5 +114,9 @@ module.exports = function(app, mongoose) {
                 }
             }
         })
-    })  
+    })
+
+    
+    
+    
 }

@@ -1,42 +1,39 @@
-<html class="form-style-1">
-<head>
-    <link href="assets/style.css" type="text/css" rel="stylesheet"/>
-</head>
-<body class="form-style-1">
+<html>
+<head><link rel="stylesheet" type="text/css" href="/assets/styles.css"/></head>
 
-<h1><b>MongoDB CRUD Demo</b></h1>
+<body style="background-color: rgb(229, 245, 250);">
 <title>MongoDB CRUD Demo</title>
+<div class="simple-style">
+<div>
+    <h2>MongoDB CRUD Demo</h2><hr>
+</div>
+<br>
+
+
 <!-- Confirmation -->
 <form method="GET" action="./">
-<ul>   
 
-<legend>Person List</legend><hr>
+<br>
+<span>Person List:</span><hr>
+<ul>   
 
 <input type="submit" value="Ok"><br><br>
 
 <%for (var i in personList){ %>
-    <table>
-        <tr>
-            <td valign="top" >
-                <label><%= i %>:</label>
-            </td>
-            <td>
-    <textarea readonly rows=4 cols=50 >
-    Mongo ID: <%= personList[i].id %>&emsp;ID: <%= personList[i].personid %>
-    Name: <%= personList[i].firstname %> <%= personList[i].surname %> 
-    Phone: <%= personList[i].telephone %>
-    </textarea>
-            </td>
-        </tr>
-    <br>
-    </table>
-<%}%>
+<textarea readonly rows=6 cols=50 >
+<%= i %>: 
+
+Mongo ID:<%= personList[i].id %>
+Name: <%= personList[i].firstname %> <%= personList[i].surname %> 
+Phone: <%= personList[i].telephone %>
+</textarea>
 <br>
+<%}%>
+
 <input type="submit" value="Ok">
 
 </ul>
 </form>
-
+</div>
 </body>
-
 </html>
