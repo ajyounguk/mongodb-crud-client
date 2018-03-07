@@ -5,16 +5,13 @@ var mongoose    = require('mongoose')
 var express     = require('express')
 var fs          = require('fs')
 
-
 // express setup
 var app         = express()
 var port = process.env.PORT || 3000
 
-
-
-
 // Controllers
 var personController   = require('./controllers/personController')
+var personSetup = require('./controllers/setupController')
 
 // load mongo config
 var mongoConfig = JSON.parse(fs.readFileSync(__dirname+'/config/mongo-config.json', 'utf8'));
@@ -31,6 +28,7 @@ mongoose.connect(mongourl)
 
 // pass app around to controller
 personController(app, mongoose)
+personSetup(app)
 
 // kick web server off
 app.listen(port)
