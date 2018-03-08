@@ -1,2 +1,3 @@
 /node_modules
-mongo-config.json
+/config/mongo-config.json
+.DS_Store
