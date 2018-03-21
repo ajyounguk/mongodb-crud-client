@@ -1,4 +1,4 @@
-## MongoDB CRUD in NodeJS - Example / Demo code
+## MongoDB CRUD in Node.js - Example / Demo code
 
 ## What is this?
 Demo code that excercises MongoDB Create Read Update Delete (CRUD) operations with the mongoose npm module
