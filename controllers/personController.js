@@ -33,7 +33,7 @@ module.exports = function(app, mongoose) {
 
     })
 
-    // 2. List personS
+    // 2. List persons
     app.get('/person', function (req, res) {
 
 

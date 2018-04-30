@@ -32,3 +32,4 @@ personSetup(app)
 
 // kick web server off
 app.listen(port)
+console.log('mongo demo listening on port', port)
