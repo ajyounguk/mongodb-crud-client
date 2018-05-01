@@ -1,16 +1,24 @@
 module.exports = function(app, mongoose) {
 
+    var ui = {
+        menuitem: 1,
+        data: []
+    }
 
     var Person = require('../models/personModel')
-    
     var bodyParser = require('body-parser')
     var urlencodedParser = bodyParser.urlencoded({extended: false})
 
-   
-   
     // serve up index
     app.get('/', function (req, res) {
-        res.render('./index')
+
+        // reset ui data
+        ui = {
+            menuitem: 1,
+            data: []
+        }
+
+        res.render('./index', { ui: ui })
     })
 
     // 1. Add Person
@@ -23,12 +31,24 @@ module.exports = function(app, mongoose) {
             telephone: req.body.telephone    
         })
 
+        ui.menuitem = 1
+        ui.data[ui.menuitem]= {
+            status: '',
+            action: '',
+            data: ''
+        }
+
        personModel.save(function (err) {
-           if (err) throw err 
-           else {
-               res.status(201)
-               res.render('./confirm_person_add', personModel)
-           }
+            if (err) {
+                ui.data[ui.menuitem].status= '500'
+                ui.data[ui.menuitem].data = err
+            } else {
+                ui.data[ui.menuitem].status= '201'
+                ui.data[ui.menuitem].data = personModel
+            }
+
+           ui.data[ui.menuitem].action = 'create'
+           res.render('./index.ejs', { ui: ui })
        })
 
     })
@@ -38,12 +58,24 @@ module.exports = function(app, mongoose) {
 
 
         Person.find( {}, function(err, persons) {
-            if (err) throw (err)
-            else {
-                
-                res.status(200)
-                res.render('./list_person', { "personList" : persons })
+
+            ui.menuitem = 2
+            ui.data[ui.menuitem]= {
+                status: '',
+                action: '',
+                data: ''
             }
+
+            if (err) {
+                ui.data[ui.menuitem].status= '500'
+                ui.data[ui.menuitem].data = err
+            } else {
+                ui.data[ui.menuitem].status= '201'
+                ui.data[ui.menuitem].data = persons
+            }
+
+            ui.data[ui.menuitem].action = 'read'
+            res.render('./index.ejs', { ui: ui })
         })
     })
  
@@ -65,21 +97,26 @@ module.exports = function(app, mongoose) {
          }
 
         Person.findByIdAndUpdate( req.body.mongoid, newPerson, function (err, person) {
-            if (err) {
-                console.log('update error', err)
-            } else {
-                if (person) {
-                    res.status(200)
-                    person['newfirstname'] = req.body.firstname
-                    person['newsurname'] = req.body.surname
-                    person['newtelephone'] = req.body.telephone
 
-                    res.render('./confirm_person_update', person )
-                } else {
-                    res.status(404)
-                    res.render('./confirm_person_update', { "_id" : "ERROR Mongo ID Not Found" })
+            ui.menuitem = 3
+            ui.data[ui.menuitem]= {
+                status: '',
+                action: '',
+                data: ''
+            }
+
+            if (err) {
+                ui.data[ui.menuitem].status= '500'
+            } else {
+                ui.data[ui.menuitem].status= '200'
+                ui.data[ui.menuitem].data = {
+                    oldPerson: person,
+                    newPerson: newPerson
                 }
             }
+            
+            ui.data[ui.menuitem].action = 'update'   
+            res.render('./index.ejs', { ui: ui })
         })
      })
  
@@ -87,29 +124,39 @@ module.exports = function(app, mongoose) {
     // 4. Delete Persons
     app.post('/person/delete', urlencodedParser, function(req, res) {
 
+        ui.menuitem = 4
+        ui.data[ui.menuitem]= {
+            status: '',
+            action: '',
+            data: ''
+        }
+
+        // is id valid?
         if (! mongoose.Types.ObjectId.isValid(req.body.mongoid)) {
             res.status(500) 
-            res.render('./confirm_person_del', { "_id" : "ERROR Invalid Mongo ID" })
+            ui.data[ui.menuitem].status = '500'
+            ui.data[ui.menuitem].data = ui.data[ui.menuitem].status= '500'
+            ui.data[ui.menuitem].data = req.body.mongoid + ' is not a valid mongo ID'
         }
 
         Person.findByIdAndRemove( req.body.mongoid, function (err, person) {
+
             if (err) {
-                res.status(500) 
-                res.render(err)
+                ui.data[ui.menuitem].status= '500'
+                ui.data[ui.menuitem].data = err
             } else {
-                if (person) {
-                    console.log(person)
-                    res.status(202)
-                    res.render('./confirm_person_del', person )
+                if (person == null) {
+                    ui.data[ui.menuitem].status= '404'
+                    ui.data[ui.menuitem].data = 'person id ' + req.body.mongoid + ' not found'
                 } else {
-                    res.status(404)
-                    res.render('./confirm_person_del', { "_id" : "ERROR Mongo ID Not Found" })
+                    ui.data[ui.menuitem].status= '200'
+                    ui.data[ui.menuitem].data = person
                 }
             }
+               
+            ui.data[ui.menuitem].action = 'update'   
+            res.render('./index.ejs', { ui: ui })
+
         })
     })
-
-    
-    
-    
 }
