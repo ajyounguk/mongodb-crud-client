@@ -23,6 +23,7 @@ app.use('/assets', express.static(__dirname+'/public'))
 app.set('views', __dirname+'/views');
 app.set('view engine', 'ejs')
 
+
 // connect to mongodb
 mongoose.connect(mongourl)
 
@@ -32,4 +33,5 @@ personSetup(app)
 
 // kick web server off
 app.listen(port)
-console.log('mongo demo listening on port', port)
+
+console.log('mongo client listening on port', port)

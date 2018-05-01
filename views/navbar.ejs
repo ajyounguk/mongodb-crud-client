@@ -1,0 +1,31 @@
+<!-- Menu & Navigation partial -->
+
+    <div class ="titlediv">
+        <h2>Mongo CRUD Client</h2><hr> 
+        <input class ="menu-button" type="submit" value="Create" onclick="displayOption('1')">
+        <input class ="menu-button" type="submit" value="Read" onclick="displayOption('2')">
+        <input class ="menu-button" type="submit" value="Update" onclick="displayOption('3')">
+        <input class ="menu-button" type="submit" value="Delete" onclick="displayOption('4')"> 
+        <input type="button" onclick="location.href='/';" value="Reset" />
+    </div>
+
+
+<script>
+    function displayOption(activeOption) {
+
+        activeOption--;
+        var i;
+        var activediv = document.getElementsByClassName("menu-div");
+        var activebutton = document.getElementsByClassName("menu-button");
+
+        for (i = 0; i < activediv.length; i++) {
+            if (i == activeOption) {    
+                activediv[i].style.display = "block"; 
+                activebutton[i].style.background = "rgb(0, 9, 12)";
+            } else {
+                activediv[i].style.display  = "none"; 
+                activebutton[i].style.background = "";
+            }
+        }
+    }
+</script>
