@@ -38,7 +38,7 @@ cd mongodb-crud-demo
 npm install
 ```
 
-### Mongo Config:
+### Mongo Config
 Copy /config/mongo-config-sample.json to mongo-config.json
 Needs mongo username and password and mongo running with --auth
 ```
@@ -55,18 +55,7 @@ point your browser at the lport 3000 to load Client
 http://0.0.0.0:3000
 
 
-## More Info:
-For more information on MongoDB:
-https://www.mongodb.com/what-is-mongodb
-
-For more information on Express:
-https://www.npmjs.com/package/express
-
-For more information on Mongoose:
-https://www.npmjs.com/package/mongoose
-
-
-## DB user credentials example.
+## DB user credentials example
 This is #NOTt* a hardened/strong security model for mongo, but a simple set of reference creds to get you started:
 
 
@@ -146,6 +135,16 @@ db.createUser(
 }
 ```
 
+
+## More Info
+For more information on MongoDB:
+https://www.mongodb.com/what-is-mongodb
+
+For more information on Express:
+https://www.npmjs.com/package/express
+
+For more information on Mongoose:
+https://www.npmjs.com/package/mongoose
 
 
 
