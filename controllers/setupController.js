@@ -1,66 +1,83 @@
 var Person = require('../models/personModel')
 
-module.exports = function(app) {
+module.exports = function (app, mongoose) {
 
+    // seed database
     app.get('/person/setup', function (req, res) {
 
-        // seed database
-        var seedPeople = [
-            {
-                firstnmae : 'Andrew',
+    
+        var seedPeople = [{
+                firstname: 'Andrew',
                 surname: 'Young',
                 telephone: '0873666333',
             },
             {
-                firstnmae : 'Maria',
+                firstname: 'Maria',
                 surname: 'Lucia',
                 telephone: '4244234234',
             },
             {
-                firstnmae : 'Jon',
+                firstname: 'Jon',
                 surname: 'Osmond',
                 telephone: '0873666333',
             },
             {
-                firstnmae : 'Lucy',
+                firstname: 'Lucy',
                 surname: 'Carter',
                 telephone: '0873666333',
             },
             {
-                firstnmae : 'Daniel',
+                firstname: 'Daniel',
                 surname: 'Jones',
                 telephone: '0873666333',
             },
             {
-                firstnmae : 'Rachel',
+                firstname: 'Rachel',
                 surname: 'Fuligula',
                 telephone: '0873666333',
             },
             {
-                firstnmae : 'Tony',
+                firstname: 'Tony',
                 surname: 'Strider',
                 telephone: '0873666333',
             },
             {
-                firstnmae : 'Marcus',
+                firstname: 'Marcus',
                 surname: 'Smith',
                 telephone: '0873666333',
             },
             {
-                firstnmae : 'Penelope',
+                firstname: 'Penelope',
                 surname: 'Baker',
                 telephone: '0873666333',
             },
 
-        ]        
+        ]
 
-        Person.create(seedPeople, function(err, results) {
-            if (err) { 
+        Person.create(seedPeople, function (err, data) {
+            if (err) {
                 res.send(err)
             } else {
-                res.send(results)
+                res.send(data)
             }
-            
+
         })
     })
+
+
+    // purget people collection
+    app.get('/person/purge', function (req, res) {
+
+        mongoose.connection.db.dropCollection('people', function(err, data) {
+
+            if (err) {
+                res.send(err)
+            } else {
+                res.send(data)
+            }
+        })
+
+    })
+
+
 }
