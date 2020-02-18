@@ -24,7 +24,6 @@ purge mongo collection = point browser at http://0.0.0.0:3000/person/purge
 setup / seed data in collection = http://0.0.0.0:3000/person/setup
 
 
-
 ## Installation overview
 
 ### Install mongo DB with auth model
@@ -84,7 +83,7 @@ db.createUser(
 
 4. Restart db with authentication model on:
 ```
-Mongod -- auth
+mongod -- auth
 ```
 
 5. Connect to mongo cli and login with admin user:
