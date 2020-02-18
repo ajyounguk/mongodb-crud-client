@@ -56,7 +56,7 @@ http://0.0.0.0:3000
 
 
 ## DB user credentials example
-This is #NOTt* a hardened/strong security model for mongo, but a simple set of reference creds to get you started:
+This is #NOT* a hardened/strong security model for mongo, but a simple set of reference creds to get you started:
 
 
 1. Start mongo with no auth model:
