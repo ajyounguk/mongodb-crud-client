@@ -27,7 +27,7 @@ app.set('view engine', 'ejs')
 // connect to mongodb
 mongoose.connect(mongourl)
 
-// inti controllers
+// init controllers
 personController(app, mongoose)
 personSetup(app, mongoose)
 
