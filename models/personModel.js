@@ -10,6 +10,7 @@ var personSchema = new Schema({
 })
 
 // person schema for mongo 
+// schema in this context defines the collection in the db (db defined in mongo config connection string)
 var Person = mongoose.model('Person', personSchema)
 
 module.exports = Person
