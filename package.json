@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/ajyounguk/mongodb-crud-demo#readme",
   "dependencies": {
-    "ejs": "^2.7.4",
-    "express": "^4.16.4",
-    "mongoose": "^5.12.8"
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "mongoose": "^5.13.15"
   }
 }

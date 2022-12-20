@@ -6,8 +6,8 @@
     </head>
 
     <body class="simple-style" onLoad=displayOption(<%= ui.menuitem %>)>
-        <% include ./navbar.ejs %>
-        <% include ./mongo.ejs %>
+        <%- include('navbar.ejs'); %>
+        <%- include('mongo.ejs'); %>
     </body>
 
 </html>
