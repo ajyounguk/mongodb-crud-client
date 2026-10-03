@@ -85,14 +85,14 @@ The app needs `find`, `insert`, `update` and `remove` on one database. The built
 ```js
 use data
 db.createUser({
-  user: "data_dev",
+  user: "test_user",
   pwd: passwordPrompt(),
   roles: [{ role: "readWrite", db: "data" }]
 })
 ```
 
 ```json
-{ "mongourl": "mongodb://data_dev:<password>@127.0.0.1:27017/data?authSource=data" }
+{ "mongourl": "mongodb://test_user:<password>@127.0.0.1:27017/data?authSource=data" }
 ```
 
 ### Credentials: prefer short-lived ones
