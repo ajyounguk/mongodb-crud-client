@@ -1,3 +1,4 @@
 /node_modules
 /config/mongo-config.json
 .DS_Store.env
+.claude/settings.local.json

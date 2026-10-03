@@ -62,7 +62,7 @@ If MongoDB is down at startup, the app keeps running, retries every 5 seconds an
 The connection string comes from, in order:
 
 1. the `MONGODB_URI` environment variable
-2. `config/mongo-config.json`: copy `config/mongo-config-sample.json` and edit it (`"mongourl"` or `"uri"`)
+2. `config/mongo-config.json`: copy `config/mongo-config-sample.json` and edit `"mongourl"` (`"uri"` also works). The sample's `_help` block explains each part of the connection string and is ignored by the app
 3. the default, `mongodb://127.0.0.1:27017/crud-demo` (no auth)
 
 `config/mongo-config.json` is git-ignored. Keep it that way: it's where the password lives.
@@ -83,16 +83,16 @@ npm start
 The app needs `find`, `insert`, `update` and `remove` on one database. The built-in `readWrite` role on that database is enough; don't use an admin or `dbOwner` user. In `mongosh`, as an admin:
 
 ```js
-use crud-demo
+use data
 db.createUser({
-  user: "crud_app",
+  user: "data_dev",
   pwd: passwordPrompt(),
-  roles: [{ role: "readWrite", db: "crud-demo" }]
+  roles: [{ role: "readWrite", db: "data" }]
 })
 ```
 
 ```json
-{ "mongourl": "mongodb://crud_app:<password>@127.0.0.1:27017/crud-demo?authSource=crud-demo" }
+{ "mongourl": "mongodb://data_dev:<password>@127.0.0.1:27017/data?authSource=data" }
 ```
 
 ### Credentials: prefer short-lived ones

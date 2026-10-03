@@ -38,6 +38,13 @@ describe('loadConfig', () => {
         assert.deepEqual(cfg, { uri: 'mongodb://127.0.0.1/env', source: 'env:MONGODB_URI' })
     })
 
+    it('loads the shipped sample (its _help block is ignored)', () => {
+        fs.copyFileSync(path.join(__dirname, '..', 'config', 'mongo-config-sample.json'), path.join(dir, 'mongo-config.json'))
+        const { uri } = loadConfig({ env: {}, configDir: dir })
+        assert.equal(uri, 'mongodb://data_dev:CHANGE_ME@127.0.0.1:27017/data?authSource=data')
+        assert.equal(describeUri(uri).db, 'data')
+    })
+
     it('fails clearly on invalid JSON or a missing key', () => {
         write('{ nope')
         assert.throws(() => loadConfig({ env: {}, configDir: dir }), /not valid JSON/)
