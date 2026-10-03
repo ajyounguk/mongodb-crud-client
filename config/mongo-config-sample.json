@@ -1,3 +1,14 @@
 {
-    "mongourl": "mongodb://user:pass@127.0.0.1:27017/myDatabase"
+    "_help": {
+        "about": "Copy this file to config/mongo-config.json (git-ignored) and edit mongourl. The app only reads mongourl (or uri); _help is ignored. The MONGODB_URI env var overrides this file.",
+        "format": "mongodb://<user>:<password>@<host>:<port>/<database>?authSource=<auth database>",
+        "user": "MongoDB user the app logs in as, e.g. data_dev. Give it readWrite on <database> only.",
+        "password": "That user's password. URL-encode @ : / ? # % if the password contains them.",
+        "host": "MongoDB server address: 127.0.0.1 for local, or a LAN IP/hostname. Loopback shows a green 'Local' badge, anything else amber 'Custom host'.",
+        "port": "27017 unless you mapped a different port.",
+        "database": "Database the app uses; the collection is always 'people'.",
+        "authSource": "Database the user was created in (the one you were in when you ran db.createUser). Usually the same as <database>; 'admin' if the user was created there.",
+        "atlas": "For Atlas use mongodb+srv://<user>:<password>@<cluster>.mongodb.net/<database> (no port; authSource defaults to admin)."
+    },
+    "mongourl": "mongodb://data_dev:CHANGE_ME@127.0.0.1:27017/data?authSource=data"
 }

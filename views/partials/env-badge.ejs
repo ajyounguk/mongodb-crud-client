@@ -1,0 +1,9 @@
+<%
+    const kindLabel = { local: 'Local', atlas: 'Atlas', custom: 'Custom host' }[db.kind] || 'Unknown'
+%>
+<div class="env-badge env-<%= db.kind %>" title="<%= db.label %>">
+    <span class="env-dot state-<%= dbState %>" aria-hidden="true"></span>
+    <span class="env-kind"><%= kindLabel %></span>
+    <span class="env-detail"><%= db.label %> / <%= db.db %></span>
+    <span class="env-state"><%= dbState %></span>
+</div>

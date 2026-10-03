@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="/assets/styles.css"/>
-        <title>MongoDB CRUD Client</title>
-    </head>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MongoDB CRUD Client</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script src="/assets/app.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <h1>MongoDB CRUD Client</h1>
+        <%- include('partials/env-badge') %>
+    </header>
 
-    <body class="simple-style" onLoad=displayOption(<%= ui.menuitem %>)>
-        <%- include('navbar.ejs'); %>
-        <%- include('mongo.ejs'); %>
-    </body>
+    <div class="layout">
+        <%- include('partials/sidebar') %>
 
+        <main class="content">
+            <%- include('partials/' + view) %>
+            <%- include('partials/response') %>
+        </main>
+    </div>
+</body>
 </html>
-
-
-
-
-
