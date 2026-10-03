@@ -39,10 +39,14 @@ describe('loadConfig', () => {
     })
 
     it('loads the shipped sample (its _help block is ignored)', () => {
-        fs.copyFileSync(path.join(__dirname, '..', 'config', 'mongo-config-sample.json'), path.join(dir, 'mongo-config.json'))
+        const sample = path.join(__dirname, '..', 'config', 'mongo-config-sample.json')
+        fs.copyFileSync(sample, path.join(dir, 'mongo-config.json'))
         const { uri } = loadConfig({ env: {}, configDir: dir })
-        assert.equal(uri, 'mongodb://data_dev:CHANGE_ME@127.0.0.1:27017/data?authSource=data')
-        assert.equal(describeUri(uri).db, 'data')
+        assert.equal(uri, JSON.parse(fs.readFileSync(sample, 'utf8')).mongourl)
+        // placeholder values can change; it must stay a usable local URI
+        const d = describeUri(uri)
+        assert.equal(d.kind, 'local')
+        assert.ok(d.db)
     })
 
     it('fails clearly on invalid JSON or a missing key', () => {
