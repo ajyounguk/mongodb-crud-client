@@ -1,83 +1,19 @@
-var Person = require('../models/personModel')
+// Seed and purge the people collection. These used to be GETs; they change
+// data, so they are POSTs now (and covered by the same-origin check).
 
-module.exports = function (app, mongoose) {
+const express = require('express')
+const { runAction } = require('../lib/run')
 
-    // seed database
-    app.get('/person/setup', function (req, res) {
+module.exports = function setupController({ people, results }) {
+    const router = express.Router()
 
-    
-        var seedPeople = [{
-                firstname: 'Andrew',
-                surname: 'Young',
-                telephone: '0873666333',
-            },
-            {
-                firstname: 'Maria',
-                surname: 'Lucia',
-                telephone: '4244234234',
-            },
-            {
-                firstname: 'Jon',
-                surname: 'Osmond',
-                telephone: '0873666333',
-            },
-            {
-                firstname: 'Lucy',
-                surname: 'Carter',
-                telephone: '0873666333',
-            },
-            {
-                firstname: 'Daniel',
-                surname: 'Jones',
-                telephone: '0873666333',
-            },
-            {
-                firstname: 'Rachel',
-                surname: 'Fuligula',
-                telephone: '0873666333',
-            },
-            {
-                firstname: 'Tony',
-                surname: 'Strider',
-                telephone: '0873666333',
-            },
-            {
-                firstname: 'Marcus',
-                surname: 'Smith',
-                telephone: '0873666333',
-            },
-            {
-                firstname: 'Penelope',
-                surname: 'Baker',
-                telephone: '0873666333',
-            },
+    async function handle(res, action, okStatus, fn) {
+        const id = results.put(await runAction(action, okStatus, fn))
+        res.redirect(303, `/?view=admin&result=${id}`)
+    }
 
-        ]
+    router.post('/person/setup', (req, res) => handle(res, 'seed', 201, () => people.seed()))
+    router.post('/person/purge', (req, res) => handle(res, 'purge', 200, () => people.purge()))
 
-        Person.create(seedPeople, function (err, data) {
-            if (err) {
-                res.send(err)
-            } else {
-                res.send(data)
-            }
-
-        })
-    })
-
-
-    // purget people collection
-    app.get('/person/purge', function (req, res) {
-
-        mongoose.connection.db.dropCollection('people', function(err, data) {
-
-            if (err) {
-                res.send(err)
-            } else {
-                res.send(data)
-            }
-        })
-
-    })
-
-
+    return router
 }

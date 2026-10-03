@@ -1,0 +1,21 @@
+<%
+    const items = [
+        { view: 'create', href: '/?view=create', label: 'Create', hint: 'Add a person' },
+        { view: 'list', href: '/person', label: 'Read', hint: 'List people' },
+        { view: 'update', href: '/?view=update', label: 'Update', hint: 'Edit a person' },
+        { view: 'delete', href: '/?view=delete', label: 'Delete', hint: 'Remove a person' },
+        { view: 'admin', href: '/?view=admin', label: 'Setup', hint: 'Seed or purge' }
+    ]
+%>
+<nav class="sidebar" aria-label="Operations">
+    <ul>
+        <% for (const item of items) { %>
+        <li>
+            <a href="<%= item.href %>" class="<%= item.view === view ? 'active' : '' %>"<% if (item.view === view) { %> aria-current="page"<% } %>>
+                <span class="nav-label"><%= item.label %></span>
+                <span class="nav-hint"><%= item.hint %></span>
+            </a>
+        </li>
+        <% } %>
+    </ul>
+</nav>

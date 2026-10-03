@@ -1,0 +1,42 @@
+<section class="card">
+    <div class="card-head">
+        <h2>People</h2>
+        <% if (list) { %>
+        <span class="muted"><%= list.total %> in collection</span>
+        <% } %>
+    </div>
+
+    <% if (!list) { %>
+    <p class="muted">Couldn't load the list. See the response below.</p>
+    <% } else if (list.items.length === 0) { %>
+    <p class="muted">No people found. Use <a href="/?view=admin">Setup</a> to seed some sample data.</p>
+    <% } else { %>
+    <div class="table-wrap">
+        <table class="table">
+            <thead>
+                <tr><th>Mongo ID</th><th>Name</th><th>Telephone</th><th><span class="visually-hidden">Actions</span></th></tr>
+            </thead>
+            <tbody>
+                <% for (const p of list.items) { %>
+                <tr>
+                    <td class="mono"><%= p._id %></td>
+                    <td><%= p.firstname %> <%= p.surname %></td>
+                    <td><%= p.telephone %></td>
+                    <td class="row-actions">
+                        <a class="btn btn-small btn-ghost" href="/?view=update&amp;id=<%= encodeURIComponent(p._id) %>">Edit</a>
+                        <a class="btn btn-small btn-ghost btn-danger-text" href="/?view=delete&amp;id=<%= encodeURIComponent(p._id) %>">Delete</a>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+    <% } %>
+
+    <div class="pager">
+        <a class="btn btn-small btn-ghost" href="/person">First page</a>
+        <% if (list && list.next) { %>
+        <a class="btn btn-small" href="/person?after=<%= encodeURIComponent(list.next) %>&amp;limit=<%= list.limit %>">Next page</a>
+        <% } %>
+    </div>
+</section>

@@ -1,0 +1,20 @@
+<section class="card">
+    <h2>Create person</h2>
+    <form method="POST" action="/person" class="form">
+        <div class="field">
+            <label for="create-firstname">First name</label>
+            <input type="text" id="create-firstname" name="firstname" maxlength="100" autocomplete="off" required>
+        </div>
+        <div class="field">
+            <label for="create-surname">Surname</label>
+            <input type="text" id="create-surname" name="surname" maxlength="100" autocomplete="off" required>
+        </div>
+        <div class="field">
+            <label for="create-telephone">Telephone</label>
+            <input type="tel" id="create-telephone" name="telephone" maxlength="30" autocomplete="off" required>
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn">Create person</button>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,36 @@
+<section class="card">
+    <h2>Update person</h2>
+
+    <form method="GET" action="/" class="form form-inline">
+        <input type="hidden" name="view" value="update">
+        <div class="field grow">
+            <label for="update-load-id">Load by Mongo ID</label>
+            <input type="text" id="update-load-id" name="id" value="<%= person ? person._id : '' %>" pattern="[0-9a-fA-F]{24}" autocomplete="off" required>
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn btn-ghost">Load</button>
+        </div>
+    </form>
+
+    <form method="POST" action="/person/update" class="form">
+        <div class="field">
+            <label for="update-mongoid">Mongo ID</label>
+            <input type="text" id="update-mongoid" name="mongoid" value="<%= person ? person._id : '' %>" pattern="[0-9a-fA-F]{24}" autocomplete="off" required>
+        </div>
+        <div class="field">
+            <label for="update-firstname">First name</label>
+            <input type="text" id="update-firstname" name="firstname" value="<%= person ? person.firstname : '' %>" maxlength="100" autocomplete="off" required>
+        </div>
+        <div class="field">
+            <label for="update-surname">Surname</label>
+            <input type="text" id="update-surname" name="surname" value="<%= person ? person.surname : '' %>" maxlength="100" autocomplete="off" required>
+        </div>
+        <div class="field">
+            <label for="update-telephone">Telephone</label>
+            <input type="tel" id="update-telephone" name="telephone" value="<%= person ? person.telephone : '' %>" maxlength="30" autocomplete="off" required>
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn">Update person</button>
+        </div>
+    </form>
+</section>

@@ -1,0 +1,20 @@
+<section class="card">
+    <h2>Delete person</h2>
+
+    <% if (person) { %>
+    <p class="target">
+        <strong><%= person.firstname %> <%= person.surname %></strong>
+        <span class="muted"><%= person.telephone %></span>
+    </p>
+    <% } %>
+
+    <form method="POST" action="/person/delete" class="form" data-confirm="Delete this person? This can't be undone.">
+        <div class="field">
+            <label for="delete-mongoid">Mongo ID</label>
+            <input type="text" id="delete-mongoid" name="mongoid" value="<%= person ? person._id : '' %>" pattern="[0-9a-fA-F]{24}" autocomplete="off" required>
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn btn-danger">Delete person</button>
+        </div>
+    </form>
+</section>

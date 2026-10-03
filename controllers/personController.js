@@ -1,175 +1,63 @@
-module.exports = function (app, mongoose) {
+// CRUD routes. Every handler catches its own errors and always responds,
+// so a database failure can't leave a request hanging.
 
-    var ui = {
-        menuitem: 1,
-        data: []
+const express = require('express')
+const { runAction: run } = require('../lib/run')
+
+const VIEWS = ['create', 'list', 'update', 'delete', 'admin']
+
+module.exports = function personController({ people, results }) {
+    const router = express.Router()
+
+    // id (optional) re-loads that person into the form on the GET
+    function postRedirectGet(res, view, result, id) {
+        const resultId = results.put(result)
+        const idParam = id ? `&id=${encodeURIComponent(id)}` : ''
+        res.redirect(303, `/?view=${view}${idParam}&result=${resultId}`)
     }
 
-    var Person = require('../models/personModel')
-    var bodyParser = require('body-parser')
-    var urlencodedParser = bodyParser.urlencoded({
-        extended: false
+    // Main page. ?view picks the panel, ?result shows a stored POST result,
+    // ?id pre-fills the update/delete forms from the database.
+    router.get('/', async (req, res) => {
+        const view = VIEWS.includes(req.query.view) ? req.query.view : 'create'
+        if (view === 'list') return res.redirect(303, '/person')
+
+        let result = typeof req.query.result === 'string' ? results.take(req.query.result) : null
+        let person = null
+        if ((view === 'update' || view === 'delete') && typeof req.query.id === 'string') {
+            const lookup = await run('read', 200, () => people.get(req.query.id))
+            if (lookup.ok) person = lookup.data
+            else result = result || lookup
+        }
+        res.render('index', { view, result, person, list: null })
     })
 
-    // serve up index
-    app.get('/', function (req, res) {
-
-        // reset ui data
-        ui = {
-            menuitem: 1,
-            data: []
-        }
-
-        res.render('./index', {
-            ui: ui
+    // Read: paginated list
+    router.get('/person', async (req, res) => {
+        const after = typeof req.query.after === 'string' && req.query.after ? req.query.after : undefined
+        const result = await run('list', 200, () => people.list({ after, limit: req.query.limit }))
+        res.status(result.status).render('index', {
+            view: 'list',
+            result,
+            person: null,
+            list: result.ok ? result.data : null
         })
     })
 
-    // 1. Add Person
-    app.post('/person', urlencodedParser, function (req, res) {
-
-        // setup data in the model
-        var personModel = Person({
-            firstname: req.body.firstname,
-            surname: req.body.surname,
-            telephone: req.body.telephone
-        })
-
-        ui.menuitem = 1
-        ui.data[ui.menuitem] = {
-            status: '',
-            action: '',
-            data: ''
-        }
-
-        personModel.save(function (err) {
-            if (err) {
-                ui.data[ui.menuitem].status = '500'
-                ui.data[ui.menuitem].data = err
-            } else {
-                ui.data[ui.menuitem].status = '201'
-                ui.data[ui.menuitem].data = personModel
-            }
-
-            ui.data[ui.menuitem].action = 'create'
-            res.render('./index.ejs', {
-                ui: ui
-            })
-        })
-
+    router.post('/person', async (req, res) => {
+        postRedirectGet(res, 'create', await run('create', 201, () => people.create(req.body)))
     })
 
-    // 2. List persons
-    app.get('/person', function (req, res) {
-
-        Person.find({}, function (err, persons) {
-
-            ui.menuitem = 2
-            ui.data[ui.menuitem] = {
-                status: '',
-                action: '',
-                data: ''
-            }
-
-            if (err) {
-                ui.data[ui.menuitem].status = '500'
-                ui.data[ui.menuitem].data = err
-            } else {
-                ui.data[ui.menuitem].status = '200'
-                ui.data[ui.menuitem].data = persons
-            }
-
-            ui.data[ui.menuitem].action = 'read'
-            res.render('./index.ejs', {
-                ui: ui
-            })
-        })
+    router.post('/person/update', async (req, res) => {
+        const body = req.body || {}
+        const result = await run('update', 200, () => people.update(body.mongoid, body))
+        postRedirectGet(res, 'update', result, result.ok ? String(result.data.after._id) : null)
     })
 
-
-
-    // 3. Add Person
-    app.post('/person/update', urlencodedParser, function (req, res) {
-
-        if (!mongoose.Types.ObjectId.isValid(req.body.mongoid)) {
-            res.status(500)
-            res.render('./confirm_person_update', {
-                "_id": "ERROR Invalid Mongo ID"
-            })
-        }
-
-        // setup update data in the model
-        var newPerson = {
-            firstname: req.body.firstname,
-            surname: req.body.surname,
-            telephone: req.body.telephone
-        }
-
-        Person.findByIdAndUpdate(req.body.mongoid, newPerson, function (err, person) {
-
-            ui.menuitem = 3
-            ui.data[ui.menuitem] = {
-                status: '',
-                action: '',
-                data: ''
-            }
-
-            if (err) {
-                ui.data[ui.menuitem].status = '500'
-            } else {
-                ui.data[ui.menuitem].status = '200'
-                ui.data[ui.menuitem].data = {
-                    oldPerson: person,
-                    newPerson: newPerson
-                }
-            }
-
-            ui.data[ui.menuitem].action = 'update'
-            res.render('./index.ejs', {
-                ui: ui
-            })
-        })
+    router.post('/person/delete', async (req, res) => {
+        const body = req.body || {}
+        postRedirectGet(res, 'delete', await run('delete', 200, () => people.remove(body.mongoid)))
     })
 
-
-    // 4. Delete Persons
-    app.post('/person/delete', urlencodedParser, function (req, res) {
-
-        ui.menuitem = 4
-        ui.data[ui.menuitem] = {
-            status: '',
-            action: '',
-            data: ''
-        }
-
-        // is id valid?
-        if (!mongoose.Types.ObjectId.isValid(req.body.mongoid)) {
-            res.status(500)
-            ui.data[ui.menuitem].status = '500'
-            ui.data[ui.menuitem].data = ui.data[ui.menuitem].status = '500'
-            ui.data[ui.menuitem].data = req.body.mongoid + ' is not a valid mongo ID'
-        }
-
-        Person.findByIdAndRemove(req.body.mongoid, function (err, person) {
-
-            if (err) {
-                ui.data[ui.menuitem].status = '500'
-                ui.data[ui.menuitem].data = err
-            } else {
-                if (person == null) {
-                    ui.data[ui.menuitem].status = '404'
-                    ui.data[ui.menuitem].data = 'person id ' + req.body.mongoid + ' not found'
-                } else {
-                    ui.data[ui.menuitem].status = '200'
-                    ui.data[ui.menuitem].data = person
-                }
-            }
-
-            ui.data[ui.menuitem].action = 'update'
-            res.render('./index.ejs', {
-                ui: ui
-            })
-
-        })
-    })
+    return router
 }

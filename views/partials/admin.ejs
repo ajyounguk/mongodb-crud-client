@@ -1,0 +1,23 @@
+<section class="card">
+    <h2>Setup</h2>
+
+    <div class="admin-row">
+        <div>
+            <h3>Seed sample data</h3>
+            <p class="muted">Inserts nine sample people into the <code>people</code> collection.</p>
+        </div>
+        <form method="POST" action="/person/setup">
+            <button type="submit" class="btn">Seed data</button>
+        </form>
+    </div>
+
+    <div class="admin-row">
+        <div>
+            <h3>Purge collection</h3>
+            <p class="muted">Deletes <strong>every</strong> document in the <code>people</code> collection.</p>
+        </div>
+        <form method="POST" action="/person/purge" data-confirm="Delete every person in the collection? This can't be undone.">
+            <button type="submit" class="btn btn-danger">Purge all</button>
+        </form>
+    </div>
+</section>
